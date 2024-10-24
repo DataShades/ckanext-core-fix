@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ckanext-core-fix"
-version = "0.7.0"
+version = "0.7.1"
 description = ""
 authors = [
     {name = "DataShades", email = "datashades@linkdigital.com.au"},
@@ -23,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 keywords = ["CKAN"]
-urls = {Homepage = "https://github.com//ckanext-core-fix"}
+urls = {Homepage = "https://github.com/DataShades/ckanext-core-fix"}
 dependencies = []
 optional-dependencies = {}
 
