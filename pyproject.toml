@@ -1,3 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ckanext-core-fix"
+version = "0.7.0"
+description = ""
+authors = [
+    {name = "DataShades", email = "datashades@linkdigital.com.au"},
+    {name = "Oleksandr Cherniavskyi", email = "mutantsan@gmail.com"},
+]
+maintainers = [
+    {name = "DataShades", email = "datashades@linkdigital.com.au"},
+]
+license = {text = "AGPL"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+keywords = ["CKAN"]
+urls = {Homepage = "https://github.com//ckanext-core-fix"}
+dependencies = []
+optional-dependencies = {}
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.entry-points]
+"babel.extractors" = {ckan = "ckan.lib.extract:extract_ckan"}
+
+[project.entry-points."ckan.plugins"]
+core_fix = "ckanext.core_fix.plugin:CoreFixPlugin"
+
+[tool.setuptools.packages]
+find = {}
+
 [tool.black]
 # line-length = 88
 # preview = true
@@ -91,4 +133,3 @@ reportUnsupportedDunderAll = true
 reportUnusedCoroutine = true
 reportUnnecessaryTypeIgnoreComment = true
 reportMatchNotExhaustive = true
-
