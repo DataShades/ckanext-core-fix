@@ -75,6 +75,6 @@ def apply_redis_session_fix(app, config) -> None:
         return
 
     # Apply the fix
-    from ckanext.core_fix.middleware import RedisSessionInterface
-    app.session_interface = RedisSessionInterface(app)
+    from ckanext.core_fix.middleware import CoreFixRedisSessionInterface
+    app.session_interface = CoreFixRedisSessionInterface(app)
     log.info("Applied Redis session fix")
