@@ -76,7 +76,7 @@ class MsgspecSerializer:
         return cast(dict[str, DecodedValue], convert_back(decoded))
 
 
-class OEHRedisSessionInterface(RedisSessionInterface):
+class RedisSessionInterface(RedisSessionInterface):
     """Custom Redis session interface that handles Markup and datetime objects.
     Overrides default Flask-Session Redis interface to fix serialization errors
     with Markup objects (flash messages).

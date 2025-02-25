@@ -72,10 +72,9 @@ def apply_redis_session_fix(app, config) -> None:
 
     # Check if this fix is disabled
     if is_fix_disabled(conf.Fixes.redis_session):
-        log.info("Redis session fix is disabled")
         return
 
     # Apply the fix
-    from ckanext.core_fix.middleware import OEHRedisSessionInterface
-    app.session_interface = OEHRedisSessionInterface(app)
+    from ckanext.core_fix.middleware import RedisSessionInterface
+    app.session_interface = RedisSessionInterface(app)
     log.info("Applied Redis session fix")
