@@ -24,7 +24,7 @@ classifiers = [
 ]
 keywords = ["CKAN"]
 urls = {Homepage = "https://github.com/DataShades/ckanext-core-fix"}
-dependencies = []
+dependencies = ["msgspec"]
 optional-dependencies = {}
 
 [project.readme]

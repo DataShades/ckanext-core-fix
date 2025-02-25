@@ -61,3 +61,21 @@ def register_fix_templates(config_: tk.CKANConfig) -> None:
             continue
 
         tk.add_template_directory(config_, f"template_fix/{fix.name}")
+
+
+def apply_redis_session_fix(app, config) -> None:
+    """Apply Redis session interface fix if enabled and conditions are met"""
+    # Check if Redis is used as session store and we're on CKAN 2.11+
+    if not (tk.config.get("SESSION_TYPE", None) == "redis" and 
+            tk.check_ckan_version(min_version="2.11")):
+        return
+    
+    # Check if this fix is disabled
+    if is_fix_disabled(conf.Fixes.redis_session):
+        log.info("Redis session fix is disabled")
+        return
+
+    # Apply the fix
+    from ckanext.core_fix.middleware import OEHRedisSessionInterface
+    app.session_interface = OEHRedisSessionInterface(app)
+    log.info("Applied Redis session fix")

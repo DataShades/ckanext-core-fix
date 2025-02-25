@@ -28,12 +28,7 @@ class CoreFixPlugin(p.SingletonPlugin):
 
     # IMiddleware
     def make_middleware(self, app, config):
-        if tk.config.get("SESSION_TYPE", None) == "redis" and tk.check_ckan_version(
-            min_version="2.11"
-        ):
-            from ckanext.core_fix.middleware import OEHRedisSessionInterface
-
-            app.session_interface = OEHRedisSessionInterface(app)
+        utils.apply_redis_session_fix(app, config)
         return app
 
     # ITemplateHelpers
