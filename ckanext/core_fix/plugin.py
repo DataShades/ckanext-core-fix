@@ -13,6 +13,7 @@ log = logging.getLogger(__name__)
 class CoreFixPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.ITemplateHelpers)
+    p.implements(p.IMiddleware, inherit=True)
 
     # IConfigurer
 
@@ -24,6 +25,16 @@ class CoreFixPlugin(p.SingletonPlugin):
         tk.add_template_directory(config_, "templates")
         tk.add_public_directory(config_, "public")
         tk.add_resource("assets", "core_fix")
+
+    # IMiddleware
+    def make_middleware(self, app, config):
+        if tk.config.get("SESSION_TYPE", None) == "redis" and tk.check_ckan_version(
+            min_version="2.11"
+        ):
+            from ckanext.core_fix.middleware import OEHRedisSessionInterface
+
+            app.session_interface = OEHRedisSessionInterface(app)
+        return app
 
     # ITemplateHelpers
 
