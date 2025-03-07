@@ -71,6 +71,12 @@ Use a fix name from the parentheses to disable it via `ckanext.core_fix.disable_
 8. Fix dashboard organization tab org labels and link (`dashboard_organization`)
     *Already in master*
 
+9. Fix Redis session serialization (`redis_session`)  
+   Fix serialization issues with `Markup` objects in Flask sessions.  
+   Replaces default Flask-Session Redis interface with a custom implementation using `msgspec`.  
+   https://github.com/ckan/ckan/pull/8704  
+   *Ongoing PR in CKAN core* 
+
 ## Config settings
 
 	# Provide a list of fixes names to disable it
