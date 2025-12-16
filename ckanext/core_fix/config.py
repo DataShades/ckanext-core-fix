@@ -22,7 +22,8 @@ class Fixes(Enum):
     restyle_activity = auto()
     group_list_csrf = auto()
     dashboard_organization = auto()
-    redis_session = auto() 
+    redis_session = auto()
+    smtp_host_port_separation = auto()
 
 
 FIXES_WITH_TEMPLATES = [

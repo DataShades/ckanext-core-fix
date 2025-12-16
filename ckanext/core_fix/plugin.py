@@ -21,6 +21,7 @@ class CoreFixPlugin(p.SingletonPlugin):
         utils.check_disabled_fixes()
         utils.notify()
         utils.register_fix_templates(config_)
+        utils.apply_smtp_sni_fix()
 
         tk.add_template_directory(config_, "templates")
         tk.add_public_directory(config_, "public")
