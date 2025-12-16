@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import logging
+import smtplib
 
 import ckan.plugins.toolkit as tk
 
 import ckanext.core_fix.config as conf
+import ckanext.core_fix.smtp_patch as smtp_patch
 from ckanext.core_fix.exceptions import CoreFixException
 
 log = logging.getLogger(__name__)
@@ -66,7 +68,7 @@ def register_fix_templates(config_: tk.CKANConfig) -> None:
 def apply_redis_session_fix(app, config) -> None:
     """Apply Redis session interface fix if enabled and conditions are met"""
     # Check if Redis is used as session store and we're on CKAN 2.11+
-    if not (config.get("SESSION_TYPE", None) == "redis" and 
+    if not (config.get("SESSION_TYPE", None) == "redis" and
             tk.check_ckan_version(min_version="2.11")):
         return
 
@@ -78,3 +80,12 @@ def apply_redis_session_fix(app, config) -> None:
     from ckanext.core_fix.middleware import CoreFixRedisSessionInterface
     app.session_interface = CoreFixRedisSessionInterface(app)
     log.info("Applied Redis session fix")
+
+
+def apply_smtp_sni_fix():
+    """Apply SMTP host/port separation fix if enabled"""
+    if is_fix_disabled(conf.Fixes.smtp_host_port_separation):
+        return
+
+    smtplib.SMTP = smtp_patch.SMTPHostPortWrapper
+    log.info("Applied SMTP host/port separation fix")

@@ -76,7 +76,14 @@ Use a fix name from the parentheses to disable it via `ckanext.core_fix.disable_
     Replaces the default Flask-Session Redis interface with msgspec.
     CKAN PR #8704 addresses the same issue with a different approach.
     https://github.com/ckan/ckan/pull/8704  
-    *Ongoing PR in CKAN core* 
+    *Already in master*
+
+10. Fix SMTP host:port parsing (`smtp_host_port_separation`)
+    Fixes SMTP TLS handshake failures when port is embedded in hostname.
+    Parses and separates host:port in smtp.server configuration to fix
+    TLS/SNI handshake errors with AWS SES and other SMTP providers.
+    https://github.com/ckan/ckan/pull/9186
+    *Ongoing PR in CKAN core*
 
 ## Config settings
 
