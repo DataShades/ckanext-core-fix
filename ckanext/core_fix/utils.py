@@ -83,6 +83,7 @@ def apply_redis_session_fix(app, config) -> None:
 
 
 def apply_smtp_sni_fix():
+    """Apply SMTP host/port separation fix if enabled"""
     if is_fix_disabled(conf.Fixes.smtp_host_port_separation):
         return
 
